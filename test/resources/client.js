@@ -27,6 +27,25 @@ describe('Zap-ScaledApp', () => {
             .catch(done);
     });
 
+    it('should search client with email hrehman200@gmail.com', (done) => {
+        const bundle = {
+            inputData: {
+            }
+        };
+
+        appTester(App.resources.client.search.operation.perform, bundle)
+            .then((results) => {
+                results.length.should.above(0);
+
+                const client = results[0];
+                if(client.name != null) {
+                    client.name.should.eql('haris');
+                }
+                done();
+            })
+            .catch(done);
+    });
+
     it('should get client with id 1', (done) => {
         const bundle = {
             inputData: {
