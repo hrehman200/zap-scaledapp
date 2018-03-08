@@ -1,8 +1,13 @@
 const Config = require('./config');
+const authentication = require('./authentication');
 const Client = require('./resources/client');
 
 const addApiKeyToHeader = (request, z, bundle) => {
-    request.headers['X-MarketingBot-Token'] = Config.api.token;
+    if (bundle.authData.apiKey) {
+        request.params = request.params || {};
+        request.headers['X-MarketingBot-Token'] = bundle.authData.apiKey;
+    }
+    //request.headers['X-MarketingBot-Token'] = Config.api.token;
     request.headers['content-type'] = 'application/json';
     return request;
 };
@@ -13,6 +18,7 @@ const App = {
     // need to know these before we can upload
     version: require('./package.json').version,
     platformVersion: require('zapier-platform-core').version,
+    authentication: authentication,
 
     // beforeRequest & afterResponse are optional hooks into the provided HTTP client
     beforeRequest: [
@@ -35,7 +41,9 @@ const App = {
     searches: {},
 
     // If you want your creates to show up, you better include it here!
-    creates: {}
+    creates: {
+        /*[Client.key]: Client*/
+    }
 };
 
 // Finally, export the app.

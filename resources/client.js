@@ -2,8 +2,10 @@ const config = require('./../config');
 
 const listClients = (z, bundle) => {
     return z.request({
-        url: config.api.base_url + '/clients',
+        url: '{{bundle.authData.apiUrl}}/clients',
     }).then((response) => {
+        z.console.log(bundle.authData);
+        z.console.log(response);
         let res = z.JSON.parse(response.content);
         if(res.message) {
             throw new Error(res.message);
@@ -15,7 +17,7 @@ const listClients = (z, bundle) => {
 
 const searchClients = (z, bundle) => {
     return z.request({
-        url: config.api.base_url + '/clients',
+        url: bundle.authData.apiUrl + '/clients',
     }).then((response) => {
         let res = z.JSON.parse(response.content);
         if(res.message) {
@@ -28,7 +30,7 @@ const searchClients = (z, bundle) => {
 
 const getClient = (z, bundle) => {
     return z.request({
-        url: `${config.api.base_url}/clients/${bundle.inputData.id}`,
+        url: `${bundle.authData.apiUrl}/clients/${bundle.inputData.id}`,
     }).then((response) => {
         if (response.status != 200) {
             throw new Error(`Unexpected status code ${response.status}`);
@@ -44,7 +46,7 @@ const getClient = (z, bundle) => {
 
 const createClient = (z, bundle) => {
     const requestOptions = {
-        url: config.api.base_url + '/clients',
+        url: bundle.authData.apiUrl + '/clients',
         method: 'POST',
         body: JSON.stringify({
             "account_key": bundle.inputData.account_key,
@@ -93,7 +95,7 @@ const createClient = (z, bundle) => {
 
 const updateClient = (z, bundle) => {
     const requestOptions = {
-        url: config.api.base_url + '/clients/' + bundle.inputData.id,
+        url: bundle.authData.apiUrl + '/clients/' + bundle.inputData.id,
         method: 'PUT',
         body: JSON.stringify({
             "account_key": bundle.inputData.account_key,
@@ -142,7 +144,7 @@ const updateClient = (z, bundle) => {
 
 const deleteClient = (z, bundle) => {
     return z.request({
-        url: `${config.api.base_url}/clients/${bundle.inputData.id}`,
+        url: `${bundle.authData.apiUrl}/clients/${bundle.inputData.id}`,
         method: 'DELETE'
     }).then((response) => {
         if (response.status != 200) {
@@ -158,6 +160,7 @@ const deleteClient = (z, bundle) => {
 
 
 const sample = {
+    "id": "id_string",
     "user_id": 1,
     "account_key": "123456",
     "address1": "10 Main St.",
@@ -248,7 +251,7 @@ module.exports = {
             sample: sample
         },
     },
-    update: {
+    /*update: {
         display: {
             label: 'Update Client',
             description: 'Update a client.',
@@ -273,7 +276,7 @@ module.exports = {
             perform: deleteClient,
             sample: sample
         },
-    },
+    },*/
     // The search method on this resource becomes a Search on this app
     search: {
         display: {
