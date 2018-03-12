@@ -1,6 +1,8 @@
 const Config = require('./config');
 const authentication = require('./authentication');
 const Client = require('./resources/client');
+const clientUpdate = require('./creates/client/update');
+const clientDelete = require('./creates/client/delete');
 
 const addApiKeyToHeader = (request, z, bundle) => {
     if (bundle.authData.apiKey) {
@@ -10,6 +12,17 @@ const addApiKeyToHeader = (request, z, bundle) => {
     //request.headers['X-MarketingBot-Token'] = Config.api.token;
     request.headers['content-type'] = 'application/json';
     return request;
+};
+
+// HTTP after middleware that checks for errors in the response.
+const checkForErrors = (response, z) => {
+    // If we get a bad status code, throw an error. This will halt the zap.
+    if (response.status != 200) {
+        throw new z.errors.HaltedError(`Unexpected status code ${response.status} from ${response.request.url}`);
+    }
+
+    // If no errors just return original response
+    return response;
 };
 
 // We can roll up all our behaviors in an App.
@@ -25,7 +38,9 @@ const App = {
         addApiKeyToHeader
     ],
 
-    afterResponse: [],
+    afterResponse: [
+        checkForErrors
+    ],
 
     // If you want to define optional resources to simplify creation of resources, searches, creates - do that here!
     resources: {
@@ -42,7 +57,8 @@ const App = {
 
     // If you want your creates to show up, you better include it here!
     creates: {
-        /*[Client.key]: Client*/
+        [clientUpdate.key]: clientUpdate,
+        [clientDelete.key]: clientDelete
     }
 };
 

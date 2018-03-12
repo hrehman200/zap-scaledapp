@@ -3,15 +3,23 @@ require('should');
 const zapier = require('zapier-platform-core');
 
 // Use this to make test calls into your app:
-const App = require('../../index');
+const App = require('../index');
+const config = require('../config');
 const appTester = zapier.createAppTester(App);
+
+const authData = {
+    apiUrl: config.api.base_url,
+    apiKey: config.api.token
+};
+console.log(authData);
 
 describe('Zap-ScaledApp', () => {
 
     it('should list existing clients', (done) => {
         const bundle = {
             inputData: {
-            }
+            },
+            authData: authData
         };
 
         appTester(App.resources.client.list.operation.perform, bundle)
@@ -30,7 +38,8 @@ describe('Zap-ScaledApp', () => {
     it('should search client with email hrehman200@gmail.com', (done) => {
         const bundle = {
             inputData: {
-            }
+            },
+            authData: authData
         };
 
         appTester(App.resources.client.search.operation.perform, bundle)
@@ -50,7 +59,8 @@ describe('Zap-ScaledApp', () => {
         const bundle = {
             inputData: {
                 id: 1
-            }
+            },
+            authData: authData
         };
 
         appTester(App.resources.client.get.operation.perform, bundle)
@@ -96,7 +106,8 @@ describe('Zap-ScaledApp', () => {
                 shipping_postal_code: 10010,
                 shipping_country_id: 840,
                 show_tasks_in_portal: false
-            }
+            },
+            authData: authData
         };
 
         appTester(App.resources.client.create.operation.perform, bundle)
@@ -113,10 +124,11 @@ describe('Zap-ScaledApp', () => {
             inputData: {
                 id: 1,
                 shipping_address1: "10 Main St UPDATED",
-            }
+            },
+            authData: authData
         };
 
-        appTester(App.resources.client.update.operation.perform, bundle)
+        appTester(App.creates.clientUpdate.operation.perform, bundle)
             .then((results) => {
                 const client = results;
                 client.shipping_address1.should.eql('10 Main St UPDATED');
@@ -129,10 +141,11 @@ describe('Zap-ScaledApp', () => {
         const bundle = {
             inputData: {
                 id: 1
-            }
+            },
+            authData: authData
         };
 
-        appTester(App.resources.client.delete.operation.perform, bundle)
+        appTester(App.creates.clientDelete.operation.perform, bundle)
             .then((results) => {
                 const client = results;
                 client.id.should.eql(1);
