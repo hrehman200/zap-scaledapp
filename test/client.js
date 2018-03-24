@@ -11,7 +11,6 @@ const authData = {
     apiUrl: config.api.base_url,
     apiKey: config.api.token
 };
-console.log(authData);
 
 describe('Zap-ScaledApp', () => {
 

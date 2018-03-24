@@ -1,5 +1,3 @@
-const config = require('./../config');
-
 const listClients = (z, bundle) => {
     return z.request({
         url: '{{bundle.authData.apiUrl}}/clients',
@@ -164,35 +162,35 @@ module.exports = {
         },
         operation: {
             inputFields: [
-                {key: 'user_id', required: true, type: 'integer', label: 'User'},
+                {key: 'user_id', required: true, type: 'integer', label: 'User', dynamic: 'user.id.name'},
                 {key: 'account_key', required: true, type: 'integer', label: 'Account Key'},
                 {key: 'address1', required: true, type: 'integer', label: 'Address 1'},
                 {key: 'address2', required: true, type: 'integer', label: 'Address 2'},
                 {key: 'city', required: true, type: 'integer', label: 'City'},
                 {key: 'state', required: true, type: 'integer', label: 'State'},
                 {key: 'postal_code', required: true, type: 'integer', label: 'Postal Code'},
-                {key: 'country_id', required: true, type: 'integer', label: 'Country'},
+                {key: 'country_id', required: true, type: 'integer', label: 'Country', dynamic: 'country.id.name'},
                 {key: 'work_phone', required: true, type: 'integer', label: 'Work Phone'},
                 {key: 'private_notes', required: true, type: 'integer', label: 'Private Notes'},
                 {key: 'public_notes', required: true, type: 'integer', label: 'Public Notes'},
                 {key: 'last_login', required: true, type: 'integer', label: 'Last Login'},
                 {key: 'website', required: true, type: 'integer', label: 'Website'},
-                {key: 'industry_id', required: true, type: 'integer', label: 'Industry'},
-                {key: 'size_id', required: true, type: 'integer', label: 'Size'},
+                {key: 'industry_id', required: true, type: 'integer', label: 'Industry', dynamic: 'industry.id.name'},
+                {key: 'size_id', required: true, type: 'integer', label: 'Size', dynamic: 'size.id.name'},
                 {key: 'is_deleted', required: true, type: 'integer', label: 'Is Deleted'},
                 {key: 'payment_terms', required: true, type: 'integer', label: 'Payment Terms'},
                 {key: 'custom_value1', required: true, type: 'integer', label: 'Custom Value 1'},
                 {key: 'custom_value2', required: true, type: 'integer', label: 'Custom Value 2'},
                 {key: 'vat_number', required: true, type: 'integer', label: 'Vat Number'},
                 {key: 'id_number', required: true, type: 'integer', label: 'ID Number'},
-                {key: 'language_id', required: true, type: 'integer', label: 'Language'},
+                {key: 'language_id', required: true, type: 'integer', label: 'Language', dynamic: 'language.id.name'},
                 {key: 'task_rate', required: true, type: 'integer', label: 'Task Rate'},
                 {key: 'shipping_address1', required: true, type: 'integer', label: 'Shipping Address 1'},
                 {key: 'shipping_address2', required: true, type: 'integer', label: 'Shipping Address 2'},
                 {key: 'shipping_city', required: true, type: 'integer', label: 'Shipping City'},
                 {key: 'shipping_state', required: true, type: 'integer', label: 'Shipping State'},
                 {key: 'shipping_postal_code', required: true, type: 'integer', label: 'Shipping Postal Code'},
-                {key: 'shipping_country_id', required: true, type: 'integer', label: 'Shipping Country'},
+                {key: 'shipping_country_id', required: true, type: 'integer', label: 'Shipping Country', dynamic: 'country.id.name'},
                 {key: 'show_tasks_in_portal', required: true, type: 'integer', label: 'Show tasks in portal'}
             ],
             perform: createClient,
@@ -202,12 +200,12 @@ module.exports = {
     // The search method on this resource becomes a Search on this app
     search: {
         display: {
-            label: 'Find Recipe',
-            description: 'Finds an existing recipe by name.',
+            label: 'Find Client',
+            description: 'Finds an existing client by email.',
         },
         operation: {
             inputFields: [
-                {key: 'name', required: true, type: 'string'},
+                {key: 'email', required: true, type: 'string'},
             ],
             perform: searchClients,
             sample: sample

@@ -1,15 +1,24 @@
-const Config = require('./config');
 const authentication = require('./authentication');
-const Client = require('./resources/client');
+const client = require('./resources/client');
 const clientUpdate = require('./creates/client/update');
 const clientDelete = require('./creates/client/delete');
+
+const contact = require('./resources/contact');
+
+const user = require('./resources/user');
+
+const quote = require('./triggers/quote');
+const country = require('./triggers/country');
+const language = require('./triggers/language');
+const size = require('./triggers/size');
+const industry = require('./triggers/industry');
+
 
 const addApiKeyToHeader = (request, z, bundle) => {
     if (bundle.authData.apiKey) {
         request.params = request.params || {};
         request.headers['X-MarketingBot-Token'] = bundle.authData.apiKey;
     }
-    //request.headers['X-MarketingBot-Token'] = Config.api.token;
     request.headers['content-type'] = 'application/json';
     return request;
 };
@@ -44,12 +53,18 @@ const App = {
 
     // If you want to define optional resources to simplify creation of resources, searches, creates - do that here!
     resources: {
-        [Client.key]: Client
+        [client.key]: client,
+        [contact.key]: contact,
+        [user.key]: user,
     },
 
     // If you want your trigger to show up, you better include it here!
     triggers: {
-
+        [quote.key]: quote,
+        [country.key]: country,
+        [language.key]: language,
+        [size.key]: size,
+        [industry.key]: industry
     },
 
     // If you want your searches to show up, you better include it here!
