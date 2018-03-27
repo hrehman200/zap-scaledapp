@@ -123,9 +123,6 @@ const sample = {
 module.exports = {
     key: 'client',
     noun: 'Client',
-    // The get method is used by Zapier to fetch a complete representation of a record. This is helpful when the HTTP
-    // response from a create call only return an ID, or a search that only returns a minimuml representation of the
-    // record. Zapier will follow these up with the get() to retrieve the entire object.
     get: {
         display: {
             label: 'Get Client',

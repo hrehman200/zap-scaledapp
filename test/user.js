@@ -14,7 +14,7 @@ const authData = {
 
 let createdUserId = '';
 
-describe('Zap-ScaledApp', () => {
+describe('Users', () => {
 
     it('should create a new user', (done) => {
         const bundle = {

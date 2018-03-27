@@ -1,11 +1,21 @@
 const authentication = require('./authentication');
 const client = require('./resources/client');
-const clientUpdate = require('./creates/client/update');
 const clientDelete = require('./creates/client/delete');
+const clientUpdate = require('./creates/client/update');
 
 const contact = require('./resources/contact');
 
 const user = require('./resources/user');
+
+const vendor = require('./resources/vendor');
+
+const taxRate = require('./resources/tax_rate');
+const taxRateDelete = require('./creates/tax_rate/delete');
+const taxRateUpdate = require('./creates/tax_rate/update');
+
+const invoice = require('./resources/invoice');
+const invoiceDelete = require('./creates/invoice/delete');
+const invoiceUpdate = require('./creates/invoice/update');
 
 const quote = require('./triggers/quote');
 const country = require('./triggers/country');
@@ -56,6 +66,9 @@ const App = {
         [client.key]: client,
         [contact.key]: contact,
         [user.key]: user,
+        [vendor.key]: vendor,
+        [taxRate.key]: taxRate,
+        [invoice.key]: invoice,
     },
 
     // If you want your trigger to show up, you better include it here!
@@ -73,7 +86,13 @@ const App = {
     // If you want your creates to show up, you better include it here!
     creates: {
         [clientUpdate.key]: clientUpdate,
-        [clientDelete.key]: clientDelete
+        [clientDelete.key]: clientDelete,
+
+        [taxRateUpdate.key]: taxRateUpdate,
+        [taxRateDelete.key]: taxRateDelete,
+
+        [invoiceUpdate.key]: invoiceUpdate,
+        [invoiceDelete.key]: invoiceDelete,
     }
 };
 

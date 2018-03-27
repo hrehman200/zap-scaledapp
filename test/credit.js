@@ -14,7 +14,7 @@ const authData = {
 
 let createdCreditId = '';
 
-describe('Zap-ScaledApp', () => {
+describe('Credits', () => {
 
     it('should create a new credit', (done) => {
         const bundle = {

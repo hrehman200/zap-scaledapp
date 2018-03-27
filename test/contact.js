@@ -14,7 +14,7 @@ const authData = {
 
 let createdContactId = '';
 
-describe('Zap-ScaledApp', () => {
+describe('Contacts', () => {
 
     it('should create a new contact', (done) => {
         const bundle = {

@@ -12,7 +12,7 @@ const authData = {
     apiKey: config.api.token
 };
 
-describe('Zap-ScaledApp', () => {
+describe('Languages', () => {
 
     it('should list existing languages', (done) => {
         const bundle = {

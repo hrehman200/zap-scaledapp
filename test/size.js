@@ -11,7 +11,7 @@ const authData = {
     apiKey: config.api.token
 };
 
-describe('Zap-ScaledApp', () => {
+describe('Sizes', () => {
 
     it('should list existing sizes', (done) => {
         const bundle = {

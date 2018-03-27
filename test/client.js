@@ -12,7 +12,7 @@ const authData = {
     apiKey: config.api.token
 };
 
-describe('Zap-ScaledApp', () => {
+describe('Clients', () => {
 
     it('should list existing clients', (done) => {
         const bundle = {
