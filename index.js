@@ -6,8 +6,12 @@ const clientUpdate = require('./creates/client/update');
 const contact = require('./resources/contact');
 
 const credit = require('./resources/credit');
-const creditDelete = require('./creates/credit/delete');
 const creditUpdate = require('./creates/credit/update');
+const creditDelete = require('./creates/credit/delete');
+
+const document = require('./resources/document');
+const documentDelete = require('./creates/document/delete');
+
 
 const user = require('./resources/user');
 
@@ -70,6 +74,7 @@ const App = {
         [client.key]: client,
         [contact.key]: contact,
         [credit.key]: credit,
+        [document.key]: document,
         [user.key]: user,
         [vendor.key]: vendor,
         [taxRate.key]: taxRate,
@@ -95,6 +100,8 @@ const App = {
 
         [creditUpdate.key]: creditUpdate,
         [creditDelete.key]: creditDelete,
+
+        [document.key]: documentDelete,
 
         [taxRateUpdate.key]: taxRateUpdate,
         [taxRateDelete.key]: taxRateDelete,

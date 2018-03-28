@@ -99,6 +99,8 @@ describe('Tax Rates', () => {
             inputData: {
                 id: createdId,
                 name: "GST 2",
+                rate: 1.5,
+                is_inclusive: false
             },
             authData: authData
         };
@@ -115,7 +117,10 @@ describe('Tax Rates', () => {
     it('should delete tax_rate with id', (done) => {
         const bundle = {
             inputData: {
-                id: createdId
+                id: createdId,
+                name: 'testing',
+                rate: 12,
+                is_inclusive: false
             },
             authData: authData
         };
