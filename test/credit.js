@@ -12,15 +12,15 @@ const authData = {
     apiKey: config.api.token
 };
 
-let createdCreditId = '';
-
 describe('Credits', () => {
+
+    let createdId = '';
 
     it('should create a new credit', (done) => {
         const bundle = {
             inputData: {
-                "amount": 10,
-                "client_id": '0aea423cbcda45339b3062f379d6d713',
+                "client_id": 5,
+                'amount': 10.20,
                 "private_notes": 'The private notes',
                 "public_notes": 'The public notes'
             },
@@ -30,8 +30,8 @@ describe('Credits', () => {
         appTester(App.resources.credit.create.operation.perform, bundle)
             .then((results) => {
                 const credit = results;
-                createdCreditId = credit.id;
-                credit.last_name.should.eql('User 1');
+                createdId = credit.id;
+                credit.public_notes.should.eql('The public notes');
                 done();
             })
             .catch(done);
@@ -49,8 +49,8 @@ describe('Credits', () => {
                 results.length.should.above(0);
 
                 const credit = results[0];
-                if(credit.last_name != null) {
-                    credit.last_name.should.eql('User 1');
+                if(credit.amount != null) {
+                    credit.amount.should.eql(10.20);
                 }
                 done();
             })
@@ -77,10 +77,10 @@ describe('Credits', () => {
             .catch(done);
     });
 
-    it('should get credit with id '+createdCreditId, (done) => {
+    it('should get credit with id '+createdId, (done) => {
         const bundle = {
             inputData: {
-                id: 1
+                id: createdId
             },
             authData: authData
         };
@@ -88,17 +88,17 @@ describe('Credits', () => {
         appTester(App.resources.credit.get.operation.perform, bundle)
             .then((results) => {
                 const credit = results;
-                credit.id.should.eql(createdCreditId);
+                credit.id.should.eql(createdId);
                 done();
             })
             .catch(done);
     });
 
-    /*it('should update credit with id '+createdCreditId, (done) => {
+    it('should update credit with id '+createdId, (done) => {
         const bundle = {
             inputData: {
-                id: 1,
-                shipping_address1: "10 Main St UPDATED",
+                id: createdId,
+                amount: 10.5
             },
             authData: authData
         };
@@ -106,16 +106,16 @@ describe('Credits', () => {
         appTester(App.creates.creditUpdate.operation.perform, bundle)
             .then((results) => {
                 const credit = results;
-                credit.shipping_address1.should.eql('10 Main St UPDATED');
+                credit.amount.should.eql(10.5);
                 done();
             })
             .catch(done);
     });
 
-    it('should delete credit with id 1', (done) => {
+    it('should delete credit that was created', (done) => {
         const bundle = {
             inputData: {
-                id: 1
+                id: createdId
             },
             authData: authData
         };
@@ -123,9 +123,9 @@ describe('Credits', () => {
         appTester(App.creates.creditDelete.operation.perform, bundle)
             .then((results) => {
                 const credit = results;
-                credit.id.should.eql(1);
+                credit.id.should.eql(createdId);
                 done();
             })
             .catch(done);
-    });*/
+    });
 });

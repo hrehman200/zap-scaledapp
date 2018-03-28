@@ -2,8 +2,6 @@ const listCredits = (z, bundle) => {
     return z.request({
         url: '{{bundle.authData.apiUrl}}/credits',
     }).then((response) => {
-        z.console.log(bundle.authData);
-        z.console.log(response);
         let res = z.JSON.parse(response.content);
         if(res.message) {
             throw new Error(res.message);
@@ -43,9 +41,8 @@ const createCredit = (z, bundle) => {
         url: bundle.authData.apiUrl + '/credits',
         method: 'POST',
         body: JSON.stringify({
-            "id": bundle.inputData.id,
-            "amount": bundle.inputData.amount,
             "client_id": bundle.inputData.client_id,
+            'amount': bundle.inputData.amount,
             "private_notes": bundle.inputData.private_notes,
             "public_notes": bundle.inputData.public_notes
         })
@@ -53,7 +50,6 @@ const createCredit = (z, bundle) => {
 
     return z.request(requestOptions)
         .then((response) => {
-            console.log(response);
             let res = z.JSON.parse(response.content);
             if(res.message) {
                 throw new Error(res.message);
@@ -70,6 +66,12 @@ const sample = {
     "private_notes": "Notes...",
     "public_notes": "Notes..."
 };
+
+const inputFields = [
+    {key: 'client_id', required: true, type: 'integer', label: 'Client ID'},
+    {key: 'private_notes', required: true, type: 'text', label: 'Private Notes'},
+    {key: 'public_notes', required: true, type: 'text', label: 'Public Notes'}
+];
 
 module.exports = {
     key: 'credit',
@@ -108,11 +110,7 @@ module.exports = {
             description: 'Creates a new credit.',
         },
         operation: {
-            inputFields: [
-                {key: 'client_id', required: true, type: 'integer', label: 'Client ID'},
-                {key: 'private_notes', required: true, type: 'string', label: 'Private Notes'},
-                {key: 'public_notes', required: true, type: 'string', label: 'Public Notes'}
-            ],
+            inputFields: inputFields,
             perform: createCredit,
             sample: sample
         },
@@ -136,6 +134,7 @@ module.exports = {
 
     outputFields: [
         {key: 'client_id', label: 'Client ID'},
+        {key: 'amount', label: 'Amount'},
         {key: 'private_notes', label: 'Private Notes'},
         {key: 'public_notes', label: 'Public Notes'}
     ]

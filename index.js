@@ -5,6 +5,10 @@ const clientUpdate = require('./creates/client/update');
 
 const contact = require('./resources/contact');
 
+const credit = require('./resources/credit');
+const creditDelete = require('./creates/credit/delete');
+const creditUpdate = require('./creates/credit/update');
+
 const user = require('./resources/user');
 
 const vendor = require('./resources/vendor');
@@ -65,6 +69,7 @@ const App = {
     resources: {
         [client.key]: client,
         [contact.key]: contact,
+        [credit.key]: credit,
         [user.key]: user,
         [vendor.key]: vendor,
         [taxRate.key]: taxRate,
@@ -87,6 +92,9 @@ const App = {
     creates: {
         [clientUpdate.key]: clientUpdate,
         [clientDelete.key]: clientDelete,
+
+        [creditUpdate.key]: creditUpdate,
+        [creditDelete.key]: creditDelete,
 
         [taxRateUpdate.key]: taxRateUpdate,
         [taxRateDelete.key]: taxRateDelete,
