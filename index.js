@@ -12,6 +12,9 @@ const creditDelete = require('./creates/credit/delete');
 const document = require('./resources/document');
 const documentDelete = require('./creates/document/delete');
 
+const expense = require('./resources/expense');
+const expenseUpdate = require('./creates/expense/update');
+const expenseDelete = require('./creates/expense/delete');
 
 const user = require('./resources/user');
 
@@ -75,6 +78,7 @@ const App = {
         [contact.key]: contact,
         [credit.key]: credit,
         [document.key]: document,
+        [expense.key]: expense,
         [user.key]: user,
         [vendor.key]: vendor,
         [taxRate.key]: taxRate,
@@ -101,7 +105,10 @@ const App = {
         [creditUpdate.key]: creditUpdate,
         [creditDelete.key]: creditDelete,
 
-        [document.key]: documentDelete,
+        [documentDelete.key]: documentDelete,
+
+        [expenseUpdate.key]: expenseUpdate,
+        [expenseDelete.key]: expenseDelete,
 
         [taxRateUpdate.key]: taxRateUpdate,
         [taxRateDelete.key]: taxRateDelete,
