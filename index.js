@@ -32,6 +32,10 @@ const invoice = require('./resources/invoice');
 const invoiceDelete = require('./creates/invoice/delete');
 const invoiceUpdate = require('./creates/invoice/update');
 
+const payment = require('./resources/payment');
+const paymentDelete = require('./creates/payment/delete');
+const paymentUpdate = require('./creates/payment/update');
+
 const quote = require('./triggers/quote');
 const country = require('./triggers/country');
 const language = require('./triggers/language');
@@ -88,6 +92,7 @@ const App = {
         [vendor.key]: vendor,
         [taxRate.key]: taxRate,
         [invoice.key]: invoice,
+        [payment.key]: payment
     },
 
     // If you want your trigger to show up, you better include it here!
@@ -123,6 +128,9 @@ const App = {
 
         [invoiceUpdate.key]: invoiceUpdate,
         [invoiceDelete.key]: invoiceDelete,
+
+        [paymentUpdate.key]: paymentUpdate,
+        [paymentDelete.key]: paymentDelete
     }
 };
 
