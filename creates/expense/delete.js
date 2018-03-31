@@ -2,16 +2,12 @@ const Expense = require('./../../resources/expense');
 
 module.exports = {
     key: 'expenseDelete',
-
-    // You'll want to provide some helpful display labels and descriptions
-    // for users. Zapier will put them into the UX.
     noun: 'Expense',
     display: {
         label: 'Delete Expense',
         description: 'Deletes a expense.'
     },
 
-    // `operation` is where the business logic goes.
     operation: {
         inputFields: [
             {key: 'expense_id', required: true, type: 'integer', label: 'Expense ID'},
