@@ -78,7 +78,8 @@ describe('Products', () => {
                 "id": createdId,
                 "product_key": "Item 2",
                 "notes": "Notes 2...",
-                "cost": 20
+                "cost": 20,
+                "quantity": 20,
             },
             authData: authData
         };
@@ -88,6 +89,7 @@ describe('Products', () => {
                 const product = results;
                 product.product_key.should.eql('Item 2');
                 product.cost.should.eql(20);
+                product.qty.should.eql(20);
                 done();
             })
             .catch(done);

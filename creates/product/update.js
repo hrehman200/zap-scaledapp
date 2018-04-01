@@ -17,7 +17,7 @@ module.exports = {
                     "product_key": bundle.inputData.product_key,
                     'notes': bundle.inputData.notes,
                     "cost": bundle.inputData.cost,
-                    "quantity": bundle.inputData.qty
+                    "quantity": bundle.inputData.quantity
                 })
             });
 
