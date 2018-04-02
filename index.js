@@ -40,6 +40,10 @@ const product = require('./resources/product');
 const productDelete = require('./creates/product/delete');
 const productUpdate = require('./creates/product/update');
 
+const project = require('./resources/project');
+const projectDelete = require('./creates/project/delete');
+const projectUpdate = require('./creates/project/update');
+
 const quote = require('./triggers/quote');
 const country = require('./triggers/country');
 const language = require('./triggers/language');
@@ -97,7 +101,8 @@ const App = {
         [taxRate.key]: taxRate,
         [invoice.key]: invoice,
         [payment.key]: payment,
-        [product.key]: product
+        [product.key]: product,
+        [project.key]: project
     },
 
     // If you want your trigger to show up, you better include it here!
@@ -138,7 +143,10 @@ const App = {
         [paymentDelete.key]: paymentDelete,
 
         [productUpdate.key]: productUpdate,
-        [productDelete.key]: productDelete
+        [productDelete.key]: productDelete,
+
+        [projectUpdate.key]: projectUpdate,
+        [projectDelete.key]: projectDelete
     }
 };
 
