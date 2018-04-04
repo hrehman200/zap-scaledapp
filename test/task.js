@@ -12,15 +12,14 @@ const authData = {
     apiKey: config.api.token
 };
 
-describe('Tax Rates', () => {
+describe('Tasks', () => {
 
     let createdId = 0;
 
     it('should create a new task', (done) => {
         const bundle = {
             inputData: {
-                amount: 1.25,
-                is_inclusive: false
+                invoice_id: 20
             },
             authData: authData
         };
@@ -28,8 +27,8 @@ describe('Tax Rates', () => {
         appTester(App.resources.task.create.operation.perform, bundle)
             .then((results) => {
                 const task = results;
-                task.rate.should.eql(1.25);
                 createdId = task.id;
+                createdId.should.greaterThan(0);
                 done();
             })
             .catch(done);
@@ -45,32 +44,6 @@ describe('Tax Rates', () => {
         appTester(App.resources.task.list.operation.perform, bundle)
             .then((results) => {
                 results.length.should.above(0);
-
-                const task = results[0];
-                if(task.name != null) {
-                    task.name.should.eql('GST');
-                }
-                done();
-            })
-            .catch(done);
-    });
-
-    it('should search task with name GST', (done) => {
-        const bundle = {
-            inputData: {
-                name:'GST'
-            },
-            authData: authData
-        };
-
-        appTester(App.resources.task.search.operation.perform, bundle)
-            .then((results) => {
-                results.length.should.above(0);
-
-                const task = results[0];
-                if(task.name != null) {
-                    task.name.should.eql('GST');
-                }
                 done();
             })
             .catch(done);
@@ -87,7 +60,7 @@ describe('Tax Rates', () => {
         appTester(App.resources.task.get.operation.perform, bundle)
             .then((results) => {
                 const task = results;
-                task.name.should.eql('GST');
+                task.id.should.eql(createdId);
                 done();
             })
             .catch(done);
@@ -102,10 +75,10 @@ describe('Tax Rates', () => {
             authData: authData
         };
 
-        appTester(App.creates.task.operation.perform, bundle)
+        appTester(App.creates.taskUpdate.operation.perform, bundle)
             .then((results) => {
                 const task = results;
-                task.name.should.eql("GST 2");
+                task.id.should.eql(createdId);
                 done();
             })
             .catch(done);
@@ -119,7 +92,7 @@ describe('Tax Rates', () => {
             authData: authData
         };
 
-        appTester(App.creates.task.operation.perform, bundle)
+        appTester(App.creates.taskDelete.operation.perform, bundle)
             .then((results) => {
                 const task = results;
                 task.id.should.eql(createdId);
