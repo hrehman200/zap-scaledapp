@@ -12,14 +12,15 @@ const authData = {
     apiKey: config.api.token
 };
 
-let createdId = 0;
-
 describe('Vendors', () => {
+
+    let createdId = 0;
 
     it('should create a new vendor', (done) => {
         const bundle = {
             inputData: {
                 user_id: 1,
+                name:'Haris ur Rehman',
                 account_key: "fel2zddn0pznuiavuxcvszwclidi6fkp",
                 address1: "10 Main St.",
                 address2: "1st Floor",
@@ -61,27 +62,7 @@ describe('Vendors', () => {
 
                 const vendor = results[0];
                 if(vendor.name != null) {
-                    vendor.name.should.eql('haris');
-                }
-                done();
-            })
-            .catch(done);
-    });
-
-    it('should search vendor with email hrehman200@gmail.com', (done) => {
-        const bundle = {
-            inputData: {
-            },
-            authData: authData
-        };
-
-        appTester(App.resources.vendor.search.operation.perform, bundle)
-            .then((results) => {
-                results.length.should.above(0);
-
-                const vendor = results[0];
-                if(vendor.name != null) {
-                    vendor.name.should.eql('haris');
+                    vendor.name.should.eql('Haris ur Rehman');
                 }
                 done();
             })
@@ -99,7 +80,7 @@ describe('Vendors', () => {
         appTester(App.resources.vendor.get.operation.perform, bundle)
             .then((results) => {
                 const vendor = results;
-                vendor.name.should.eql('haris');
+                vendor.id.should.eql(1);
                 done();
             })
             .catch(done);
@@ -109,6 +90,7 @@ describe('Vendors', () => {
         const bundle = {
             inputData: {
                 id: 1,
+                name: "Haris 2",
                 work_phone: "923139431791",
             },
             authData: authData
@@ -117,6 +99,7 @@ describe('Vendors', () => {
         appTester(App.creates.vendorUpdate.operation.perform, bundle)
             .then((results) => {
                 const vendor = results;
+                vendor.name.should.eql('Haris 2');
                 vendor.work_phone.should.eql('923139431791');
                 done();
             })

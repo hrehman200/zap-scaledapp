@@ -23,10 +23,16 @@ const expenseCategoryDelete = require('./creates/expense_category/delete');
 const user = require('./resources/user');
 
 const vendor = require('./resources/vendor');
+const vendorUpdate = require('./creates/vendor/update');
+const vendorDelete = require('./creates/vendor/delete');
 
 const taxRate = require('./resources/tax_rate');
 const taxRateDelete = require('./creates/tax_rate/delete');
 const taxRateUpdate = require('./creates/tax_rate/update');
+
+const task = require('./resources/task');
+const taskDelete = require('./creates/task/delete');
+const taskUpdate = require('./creates/task/update');
 
 const invoice = require('./resources/invoice');
 const invoiceDelete = require('./creates/invoice/delete');
@@ -104,6 +110,7 @@ const App = {
         [user.key]: user,
         [vendor.key]: vendor,
         [taxRate.key]: taxRate,
+        [task.key]: task,
         [invoice.key]: invoice,
         [payment.key]: payment,
         [product.key]: product,
@@ -151,7 +158,13 @@ const App = {
         [productDelete.key]: productDelete,
 
         [projectUpdate.key]: projectUpdate,
-        [projectDelete.key]: projectDelete
+        [projectDelete.key]: projectDelete,
+
+        [taskUpdate.key]: taskUpdate,
+        [taskDelete.key]: taskDelete,
+
+        [vendorUpdate.key]: vendorUpdate,
+        [vendorDelete.key]: vendorDelete,
     }
 };
 

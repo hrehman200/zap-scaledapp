@@ -13,19 +13,6 @@ const listVendors = (z, bundle) => {
     });
 };
 
-const searchVendors = (z, bundle) => {
-    return z.request({
-        url: bundle.authData.apiUrl + '/vendors',
-    }).then((response) => {
-        let res = z.JSON.parse(response.content);
-        if(res.message) {
-            throw new Error(res.message);
-        }
-        res = res.data;
-        return res;
-    });
-};
-
 const getVendor = (z, bundle) => {
     return z.request({
         url: `${bundle.authData.apiUrl}/vendors/${bundle.inputData.id}`,
@@ -44,6 +31,7 @@ const createVendor = (z, bundle) => {
         method: 'POST',
         body: JSON.stringify({
             "user_id": bundle.inputData.user_id,
+            'name': bundle.inputData.name,
             "account_key": bundle.inputData.account_key,
             "address1": bundle.inputData.address1,
             "address2": bundle.inputData.address2,
@@ -63,7 +51,6 @@ const createVendor = (z, bundle) => {
 
     return z.request(requestOptions)
         .then((response) => {
-            console.log(response);
             let res = z.JSON.parse(response.content);
             if(res.message) {
                 throw new Error(res.message);
@@ -75,6 +62,7 @@ const createVendor = (z, bundle) => {
 
 const sample = {
     "id": 1,
+    "name": 'Haris ur Rehman',
     "balance": 10,
     "paid_to_date": 10,
     "user_id": 1,
@@ -136,6 +124,7 @@ module.exports = {
         operation: {
             inputFields: [
                 {key: 'user_id', required: true, type: 'integer', label: 'User', dynamic: 'user.id.email'},
+                {key: 'name', required: true, type: 'string', label: 'Name'},
                 {key: 'account_key', required: true, type: 'string', label: 'Account Key'},
                 {key: 'address1', required: true, type: 'text', label: 'Address 1'},
                 {key: 'address2', required: true, type: 'text', label: 'Address 2'},
@@ -154,19 +143,6 @@ module.exports = {
             perform: createVendor,
             sample: sample
         },
-    },
-    search: {
-        display: {
-            label: 'Find Vendor',
-            description: 'Finds an existing vendor by email.',
-        },
-        operation: {
-            inputFields: [
-                {key: 'email', required: true, type: 'string'},
-            ],
-            perform: searchVendors,
-            sample: sample
-        }
     },
     sample: sample,
     outputFields: [
