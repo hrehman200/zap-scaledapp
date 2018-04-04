@@ -64,7 +64,12 @@ const addApiKeyToHeader = (request, z, bundle) => {
 const checkForErrors = (response, z) => {
     // If we get a bad status code, throw an error. This will halt the zap.
     if (response.status != 200) {
-        throw new z.errors.HaltedError(`Unexpected status code ${response.status} from ${response.request.url}`);
+        let res = z.JSON.parse(response.content);
+        if(res.message) {
+            throw new z.errors.HaltedError(res.message);
+        } else {
+            throw new z.errors.HaltedError(`Unexpected status code ${response.status} from ${response.request.url}`);
+        }
     }
 
     // If no errors just return original response
