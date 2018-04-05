@@ -12,9 +12,9 @@ const authData = {
     apiKey: config.api.token
 };
 
-let createdContactId = '';
-
 describe('Contacts', () => {
+
+    let createdId = 0;
 
     it('should create a new contact', (done) => {
         const bundle = {
@@ -22,6 +22,7 @@ describe('Contacts', () => {
                 "first_name": 'Test',
                 "last_name": 'User 1',
                 "email": 'testuser1@gmail.com',
+                'client_id': 5,
                 "is_primary": true,
                 "phone": '923139431791',
                 "last_login": '2018-01-01 01:01:01',
@@ -35,7 +36,7 @@ describe('Contacts', () => {
         appTester(App.resources.contact.create.operation.perform, bundle)
             .then((results) => {
                 const contact = results;
-                createdContactId = contact.id;
+                createdId = contact.id;
                 contact.last_name.should.eql('User 1');
                 done();
             })
@@ -62,30 +63,10 @@ describe('Contacts', () => {
             .catch(done);
     });
 
-    it('should search contact with email hrehman200@gmail.com', (done) => {
+    it('should get contact with created id', (done) => {
         const bundle = {
             inputData: {
-            },
-            authData: authData
-        };
-
-        appTester(App.resources.contact.search.operation.perform, bundle)
-            .then((results) => {
-                results.length.should.above(0);
-
-                const contact = results[0];
-                if(contact.email != null) {
-                    contact.email.should.eql('testuser1@gmail.com');
-                }
-                done();
-            })
-            .catch(done);
-    });
-
-    it('should get contact with id '+createdContactId, (done) => {
-        const bundle = {
-            inputData: {
-                id: 1
+                id: createdId
             },
             authData: authData
         };
@@ -93,17 +74,19 @@ describe('Contacts', () => {
         appTester(App.resources.contact.get.operation.perform, bundle)
             .then((results) => {
                 const contact = results;
-                contact.id.should.eql(createdContactId);
+                contact.id.should.eql(createdId);
                 done();
             })
             .catch(done);
     });
 
-    /*it('should update contact with id '+createdContactId, (done) => {
+    it('should update contact with created id', (done) => {
         const bundle = {
             inputData: {
-                id: 1,
-                shipping_address1: "10 Main St UPDATED",
+                id: createdId,
+                first_name: "Haris",
+                last_name: "User 1",
+                email: "testuser1@gmail.com"
             },
             authData: authData
         };
@@ -111,7 +94,8 @@ describe('Contacts', () => {
         appTester(App.creates.contactUpdate.operation.perform, bundle)
             .then((results) => {
                 const contact = results;
-                contact.shipping_address1.should.eql('10 Main St UPDATED');
+                contact.id.should.eql(createdId);
+                contact.first_name.should.eql('Haris');
                 done();
             })
             .catch(done);
@@ -132,5 +116,5 @@ describe('Contacts', () => {
                 done();
             })
             .catch(done);
-    });*/
+    });
 });

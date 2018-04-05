@@ -4,6 +4,8 @@ const clientDelete = require('./creates/client/delete');
 const clientUpdate = require('./creates/client/update');
 
 const contact = require('./resources/contact');
+const contactUpdate = require('./creates/contact/update');
+const contactDelete = require('./creates/contact/delete');
 
 const credit = require('./resources/credit');
 const creditUpdate = require('./creates/credit/update');
@@ -133,6 +135,9 @@ const App = {
     creates: {
         [clientUpdate.key]: clientUpdate,
         [clientDelete.key]: clientDelete,
+
+        [contactUpdate.key]: contactUpdate,
+        [contactDelete.key]: contactDelete,
 
         [creditUpdate.key]: creditUpdate,
         [creditDelete.key]: creditDelete,

@@ -65,31 +65,6 @@ describe('Expenses', () => {
         appTester(App.resources.expense.list.operation.perform, bundle)
             .then((results) => {
                 results.length.should.above(0);
-
-                const expense = results[0];
-                if(expense.amount != null) {
-                    expense.amount.should.eql(10.20);
-                }
-                done();
-            })
-            .catch(done);
-    });
-
-    it('should search expense with email hrehman200@gmail.com', (done) => {
-        const bundle = {
-            inputData: {
-            },
-            authData: authData
-        };
-
-        appTester(App.resources.expense.search.operation.perform, bundle)
-            .then((results) => {
-                results.length.should.above(0);
-
-                const expense = results[0];
-                if(expense.email != null) {
-                    expense.email.should.eql('testuser1@gmail.com');
-                }
                 done();
             })
             .catch(done);

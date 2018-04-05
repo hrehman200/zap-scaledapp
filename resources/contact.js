@@ -2,8 +2,6 @@ const listContacts = (z, bundle) => {
     return z.request({
         url: '{{bundle.authData.apiUrl}}/contacts',
     }).then((response) => {
-        z.console.log(bundle.authData);
-        z.console.log(response);
         let res = z.JSON.parse(response.content);
         if(res.message) {
             throw new Error(res.message);
@@ -46,6 +44,7 @@ const createContact = (z, bundle) => {
             "first_name": bundle.inputData.first_name,
             "last_name": bundle.inputData.last_name,
             "email": bundle.inputData.email,
+            'client_id': bundle.inputData.client_id,
             "is_primary": bundle.inputData.is_primary,
             "phone": bundle.inputData.phone,
             "last_login": bundle.inputData.last_login,
@@ -81,6 +80,19 @@ const sample = {
     "custom_value1": "Value",
     "custom_value2": "Value"
 };
+
+const inputFields = [
+    {key: 'first_name', required: true, type: 'string', label: 'First Name'},
+    {key: 'last_name', required: true, type: 'string', label: 'Last Name'},
+    {key: 'email', required: true, type: 'string', label: 'Email'},
+    {key: 'client_id', required: true, type: 'integer', label: 'client.id.first_name'},
+    {key: 'is_primary', required: true, type: 'boolean', label: 'Is Primary'},
+    {key: 'phone', required: true, type: 'string', label: 'Phone'},
+    {key: 'last_login', required: false, type: 'string', label: 'Last Login'},
+    {key: 'send_invoice', required: true, type: 'boolean', label: 'Send Invoice'},
+    {key: 'custom_value1', required: true, type: 'string', label: 'Custom Value 1'},
+    {key: 'custom_value2', required: true, type: 'string', label: 'Custom Value 2'}
+];
 
 module.exports = {
     key: 'contact',
@@ -119,34 +131,10 @@ module.exports = {
             description: 'Creates a new contact.',
         },
         operation: {
-            inputFields: [
-                {key: 'first_name', required: true, type: 'string', label: 'First Name'},
-                {key: 'last_name', required: true, type: 'string', label: 'Last Name'},
-                {key: 'email', required: true, type: 'string', label: 'Email'},
-                {key: 'is_primary', required: true, type: 'boolean', label: 'Is Primary'},
-                {key: 'phone', required: true, type: 'string', label: 'Phone'},
-                {key: 'last_login', required: false, type: 'string', label: 'Last Login'},
-                {key: 'send_invoice', required: true, type: 'boolean', label: 'Send Invoice'},
-                {key: 'custom_value1', required: true, type: 'string', label: 'Custom Value 1'},
-                {key: 'custom_value2', required: true, type: 'string', label: 'Custom Value 2'}
-            ],
+            inputFields: inputFields,
             perform: createContact,
             sample: sample
         },
-    },
-
-    search: {
-        display: {
-            label: 'Find Contact',
-            description: 'Finds an existing contact.',
-        },
-        operation: {
-            inputFields: [
-                {key: 'email', required: true, type: 'string'},
-            ],
-            perform: searchContacts,
-            sample: sample
-        }
     },
 
     sample: sample,
