@@ -2,8 +2,6 @@ const listUsers = (z, bundle) => {
     return z.request({
         url: '{{bundle.authData.apiUrl}}/users',
     }).then((response) => {
-        z.console.log(bundle.authData);
-        z.console.log(response);
         let res = z.JSON.parse(response.content);
         if(res.message) {
             throw new Error(res.message);
@@ -150,20 +148,6 @@ module.exports = {
             perform: createUser,
             sample: sample
         },
-    },
-
-    search: {
-        display: {
-            label: 'Find User',
-            description: 'Finds an existing user.',
-        },
-        operation: {
-            inputFields: [
-                {key: 'email', required: true, type: 'string'},
-            ],
-            perform: searchUsers,
-            sample: sample
-        }
     },
 
     sample: sample,

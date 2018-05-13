@@ -2,9 +2,9 @@ const contact = require('./../../resources/contact');
 
 module.exports = {
     key: 'contactUpdate',
-    noun: 'contact',
+    noun: 'Update Contact',
     display: {
-        label: 'Update contact',
+        label: 'Update Contact',
         description: 'Updates a contact.'
     },
     operation: {

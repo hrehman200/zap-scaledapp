@@ -42,7 +42,7 @@ describe('Users', () => {
             .then((results) => {
                 const user = results;
                 createdUserId = user.id;
-                user.last_name.should.eql('User 1');
+                user.last_name.should.eql('Doe');
                 done();
             })
             .catch(done);
@@ -60,29 +60,7 @@ describe('Users', () => {
                 results.length.should.above(0);
 
                 const user = results[0];
-                if(user.last_name != null) {
-                    user.last_name.should.eql('Admin');
-                }
-                done();
-            })
-            .catch(done);
-    });
-
-    it('should search user with email sys@admin.com', (done) => {
-        const bundle = {
-            inputData: {
-            },
-            authData: authData
-        };
-
-        appTester(App.resources.user.search.operation.perform, bundle)
-            .then((results) => {
-                results.length.should.above(0);
-
-                const user = results[0];
-                if(user.email != null) {
-                    user.email.should.eql('sys@admin.com');
-                }
+                user.last_name.should.eql('Doe');
                 done();
             })
             .catch(done);

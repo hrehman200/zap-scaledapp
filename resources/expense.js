@@ -153,20 +153,6 @@ module.exports = {
         },
     },
 
-    search: {
-        display: {
-            label: 'Find Expense',
-            description: 'Finds an existing expense.',
-        },
-        operation: {
-            inputFields: [
-
-            ],
-            perform: searchExpenses,
-            sample: sample
-        }
-    },
-
     sample: sample,
 
     outputFields: [

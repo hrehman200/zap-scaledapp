@@ -54,26 +54,6 @@ describe('Expense Categories', () => {
             .catch(done);
     });
 
-    it('should search expense_category with name Sample Expense Category', (done) => {
-        const bundle = {
-            inputData: {
-            },
-            authData: authData
-        };
-
-        appTester(App.resources.expense_category.search.operation.perform, bundle)
-            .then((results) => {
-                results.length.should.above(0);
-
-                const expense_category = results[0];
-                if(expense_category.name != null) {
-                    expense_category.name.should.containEql('Sample Expense Category');
-                }
-                done();
-            })
-            .catch(done);
-    });
-
     it('should get expense_category with id '+createdId, (done) => {
         const bundle = {
             inputData: {

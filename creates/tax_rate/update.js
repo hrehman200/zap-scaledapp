@@ -2,9 +2,9 @@ const TaxRate = require('./../../resources/tax_rate');
 
 module.exports = {
     key: 'taxRateUpdate',
-    noun: 'taxRateUpdate',
+    noun: 'Update Tax Rate',
     display: {
-        label: 'Update tax rate',
+        label: 'Update Tax Rate',
         description: 'Updates a tax rate.'
     },
     operation: {

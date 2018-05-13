@@ -139,20 +139,6 @@ module.exports = {
         },
     },
 
-    search: {
-        display: {
-            label: 'Find Document',
-            description: 'Finds an existing document.',
-        },
-        operation: {
-            inputFields: [
-
-            ],
-            perform: searchDocuments,
-            sample: sample
-        }
-    },
-
     sample: sample,
 
     outputFields: [

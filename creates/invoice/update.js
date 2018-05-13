@@ -2,9 +2,9 @@ const Invoice = require('./../../resources/invoice');
 
 module.exports = {
     key: 'invoiceUpdate',
-    noun: 'invoiceUpdate',
+    noun: 'Update Invoice',
     display: {
-        label: 'Update invoice',
+        label: 'Update Invoice',
         description: 'Updates a invoice.'
     },
     operation: {

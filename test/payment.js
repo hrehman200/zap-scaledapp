@@ -19,7 +19,7 @@ describe('Payments', () => {
     it('should create a new payment', (done) => {
         const bundle = {
             inputData: {
-                "invoice_id": 5,
+                "invoice_id": 2,
                 'amount': 10.20,
                 "private_notes": 'Payment notes',
             },

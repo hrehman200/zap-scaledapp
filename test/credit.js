@@ -57,26 +57,6 @@ describe('Credits', () => {
             .catch(done);
     });
 
-    it('should search credit with email hrehman200@gmail.com', (done) => {
-        const bundle = {
-            inputData: {
-            },
-            authData: authData
-        };
-
-        appTester(App.resources.credit.search.operation.perform, bundle)
-            .then((results) => {
-                results.length.should.above(0);
-
-                const credit = results[0];
-                if(credit.email != null) {
-                    credit.email.should.eql('testuser1@gmail.com');
-                }
-                done();
-            })
-            .catch(done);
-    });
-
     it('should get credit with id '+createdId, (done) => {
         const bundle = {
             inputData: {

@@ -115,20 +115,9 @@ module.exports = {
             sample: sample
         },
     },
-    search: {
-        display: {
-            label: 'Find TaxRate',
-            description: 'Finds an existing tax_rate by email.',
-        },
-        operation: {
-            inputFields: [
-                {key: 'name', required: true, type: 'string'},
-            ],
-            perform: searchTaxRates,
-            sample: sample
-        }
-    },
+
     sample: sample,
+
     outputFields: [
         {key: 'id', label: 'id'},
         {key: 'name', label: 'Name'},

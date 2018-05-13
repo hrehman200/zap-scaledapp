@@ -116,20 +116,6 @@ module.exports = {
         },
     },
 
-    search: {
-        display: {
-            label: 'Find Credit',
-            description: 'Finds an existing credit.',
-        },
-        operation: {
-            inputFields: [
-
-            ],
-            perform: searchCredits,
-            sample: sample
-        }
-    },
-
     sample: sample,
 
     outputFields: [

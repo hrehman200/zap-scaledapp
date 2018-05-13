@@ -22,11 +22,7 @@ describe('Sizes', () => {
         appTester(App.triggers.size.operation.perform, bundle)
             .then((results) => {
                 results.length.should.above(0);
-
-                const size = results[0];
-                if (size.name != null) {
-                    size.name.should.eql("1 - 3");
-                }
+                results.should.containDeep([{name: '1 - 3'}]);
                 done();
             })
             .catch(done);

@@ -56,27 +56,6 @@ describe('Tax Rates', () => {
             .catch(done);
     });
 
-    it('should search tax_rate with name GST', (done) => {
-        const bundle = {
-            inputData: {
-                name:'GST'
-            },
-            authData: authData
-        };
-
-        appTester(App.resources.tax_rate.search.operation.perform, bundle)
-            .then((results) => {
-                results.length.should.above(0);
-
-                const tax_rate = results[0];
-                if(tax_rate.name != null) {
-                    tax_rate.name.should.eql('GST');
-                }
-                done();
-            })
-            .catch(done);
-    });
-
     it('should get tax_rate with id', (done) => {
         const bundle = {
             inputData: {

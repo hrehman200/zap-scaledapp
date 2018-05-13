@@ -110,20 +110,6 @@ module.exports = {
         },
     },
 
-    search: {
-        display: {
-            label: 'Find Expense Category',
-            description: 'Finds an existing expense category.',
-        },
-        operation: {
-            inputFields: [
-
-            ],
-            perform: searchExpenseCategories,
-            sample: sample
-        }
-    },
-
     sample: sample,
 
     outputFields: [
