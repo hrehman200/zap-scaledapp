@@ -1,12 +1,13 @@
 const listCountries = (z, bundle) => {
-    const promise = z.request('{{bundle.authData.apiUrl}}/countries');
+    const promise = z.request('{{bundle.authData.apiUrl}}/static');
     return promise.then((response) => {
 
+        console.log(response.content);
         let res = z.JSON.parse(response.content);
         if(res.message) {
             throw new Error(res.message);
         }
-        res = res.data;
+        res = res.data.countries;
         return res;
     });
 };

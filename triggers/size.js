@@ -1,12 +1,12 @@
 const listSizes = (z, bundle) => {
-    const promise = z.request('{{bundle.authData.apiUrl}}/sizes');
+    const promise = z.request('{{bundle.authData.apiUrl}}/static');
     return promise.then((response) => {
 
         let res = z.JSON.parse(response.content);
         if(res.message) {
             throw new Error(res.message);
         }
-        res = res.data;
+        res = res.data.sizes;
         return res;
     });
 };
