@@ -43,7 +43,7 @@ const createClient = (z, bundle) => {
         url: bundle.authData.apiUrl + '/clients',
         method: 'POST',
         body: JSON.stringify({
-            "account_key": bundle.inputData.account_key,
+            //"account_key": bundle.inputData.account_key,
             "address1": bundle.inputData.address1,
             "address2": bundle.inputData.address2,
             "city": bundle.inputData.city,
@@ -83,6 +83,14 @@ const createClient = (z, bundle) => {
         });
 };
 
+const accountKeyField = (z, bundle) => {
+    return z.request({
+        url: bundle.authData.apiUrl + '/accounts',
+    }).then((response) => {
+        let res = z.JSON.parse(response.content);
+        return {key : 'account_key', label:'Account Key', type:'string', default:res.data.account_key};
+    });
+};
 
 const sample = {
     "id": "id_string",
@@ -160,7 +168,6 @@ module.exports = {
         operation: {
             inputFields: [
                 {key: 'user_id', required: true, type: 'integer', label: 'User', dynamic: 'user.id.email'},
-                {key: 'account_key', required: true, type: 'string', label: 'Account Key'},
                 {key: 'address1', required: true, type: 'text', label: 'Address 1'},
                 {key: 'address2', required: true, type: 'text', label: 'Address 2'},
                 {key: 'city', required: true, type: 'string', label: 'City'},
@@ -188,7 +195,8 @@ module.exports = {
                 {key: 'shipping_state', required: true, type: 'string', label: 'Shipping State'},
                 {key: 'shipping_postal_code', required: true, type: 'string', label: 'Shipping Postal Code'},
                 {key: 'shipping_country_id', required: true, type: 'integer', label: 'Shipping Country', dynamic: 'country.id.name'},
-                {key: 'show_tasks_in_portal', required: true, type: 'boolean', label: 'Show tasks in portal'}
+                {key: 'show_tasks_in_portal', required: true, type: 'boolean', label: 'Show tasks in portal'},
+                //accountKeyField
             ],
             perform: createClient,
             sample: sample

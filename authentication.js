@@ -1,13 +1,18 @@
 const testAuth = (z, bundle) => {
 
     return z.request({
-        url: '{{bundle.authData.apiUrl}}/clients',
+        url: '{{bundle.authData.apiUrl}}/accounts',
         rejectUnauthorized: false
     }).then((response) => {
         if (response.status != 200) {
             throw new Error('The API Key you supplied is invalid');
         }
-        return response;
+        let res = z.JSON.parse(response.content);
+        if(res.message) {
+            throw new Error(res.message);
+        }
+        res = res.data;
+        return res;
     });
 };
 
@@ -17,7 +22,7 @@ module.exports = {
     // they connect their account.
     fields: [
         {key: 'apiUrl', label: 'API Base URL', required: true, type: 'string'},
-        {key: 'apiKey', label: 'API Key', required: true, type: 'string'}
+        {key: 'apiKey', label: 'API Key', required: true, type: 'string'},
     ],
     // The test method allows Zapier to verify that the credentials a user provides are valid. We'll execute this
     // method whenver a user connects their account for the first time.
