@@ -47,6 +47,7 @@ const createInvoice = (z, bundle) => {
             "invoice_number": bundle.inputData.invoice_number,
             "private_notes": bundle.inputData.private_notes,
             "public_notes": bundle.inputData.public_notes,
+            "invoice_items[]": bundle.inputData.line_items
         })
     };
 
@@ -115,7 +116,13 @@ module.exports = {
                 {key: 'client_id', required: true, type: 'integer', label: 'Client ID', dynamic:'client.id.name'},
                 {key: 'invoice_number', required: true, type: 'string', label: 'Invoice Number'},
                 {key: 'private_notes', required: true, type: 'text', label: 'Private Notes'},
-                {key: 'public_notes', required: true, type: 'text', label: 'Public Notes'}
+                {key: 'public_notes', required: true, type: 'text', label: 'Public Notes'},
+                {key: 'line_items', children: [
+                    {key: 'sku', type: 'string'},
+                    {key: 'cost', type: 'number'},
+                    {key: 'notes', type: 'string'},
+                    {key: 'qty', type: 'integer'},
+                ]}
             ],
             perform: createInvoice,
             sample: sample
